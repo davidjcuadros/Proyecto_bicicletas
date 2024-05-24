@@ -1,21 +1,20 @@
-# CU001 : Iniciar Trayecto
+# CU001 : Creación de Reporte
 
 ---
 
-**Descripción:**  Cuando un deportista va a iniciar un trayecto en bicicleta, registra el inicio de trayecto indicando la longitud y la latitud de la ubicación actual
+**Descripción:**  Cualquier usuario puede crear un reporte o publicación especificando ciertos datos e incluyendo texto o imágenes
 
 **Actor:** Deportista
 
 ```plantuml
-@startuml "iniciar trayecto"
+@startuml
 left to right direction
 skinparam packageStyle rectangle
 
-actor deportista
-rectangle CycleTrainer {
-  deportista -- (Iniciar trayecto)
+actor Usuario
+rectangle CiclistAlert {
+  Usuario-- (Crear reporte)
 }
-
 @enduml
 ```
 
@@ -25,21 +24,23 @@ rectangle CycleTrainer {
 
 | Actor  | Sistema |
 |:-------|:---------|
-| 1. Ingresa la longitud y la latitud de la ubicación actual | |
-| | 2. Verifica que no exista otro trayecto activo ||
-| | 3. Determina fecha y hora |
-| | 4. Determina un id para un nuevo trayecto |
-| | 5. Almacena un nuevo trayecto con el id, fecha y hora de inicio |
-| | 6. Agrega una ubicación con la longitud y latitud de ubicación inicial a la trayectoria |
-| | 7. Retorna el id del nuevo trayecto |
-
-
+| 1. Seleccionar opción "Crear reporte" | |
+| | 2. Despliega interfaz creación de reporte  ||
+|3. Seleccionar ubicación del reporte | |
+| | 4. Almacenar ubicación |
+|5. Hacer descripción textual | |
+| 6. Seleccionar opción "Subir imágenes" | |
+| | 7. Desplegar galería|
+|8. Seleccionar imágenes  | |
+| | 9. Almacenar imágenes seleccionadas|
+|10. Seleccionar "Subir reporte" | |
+| |11. Cargar reporte|
 ## Excepciones
 
-2. Cuando ya existe un trayecto activo
+10. Si no ha seleccionado una ubicación y desea cargar el reporte
 
 | Actor  | Sistema |
 |:-------|:---------|
-| | 2.1. Muestra un mensaje "No se puede iniciar otro trayecto mientras se tiene un trayecto activo" |
-| | 2.2. Termina | 
+| | 10.1. Muestra un mensaje "No se puede crear un reporte sin una ubicación" |
+
 

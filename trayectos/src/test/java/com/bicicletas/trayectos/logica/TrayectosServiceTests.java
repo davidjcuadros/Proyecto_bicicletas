@@ -12,10 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.bicicletas.trayectos.dataAccess.TrayectosRepository;
-import com.bicicletas.trayectos.dataAccess.UbicacionesRepository;
-import com.bicicletas.trayectos.modelo.Trayecto;
-import com.bicicletas.trayectos.modelo.Ubicacion;
+import com.bicicletas.trayectos.dataAccess.*;
+import com.bicicletas.trayectos.logica.*;
+import com.bicicletas.trayectos.modelo.*;
 
 import jakarta.transaction.Transactional;
 

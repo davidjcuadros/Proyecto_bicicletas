@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Torneo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/Torneos.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/notificacion.css">
+    <link rel="stylesheet" href="css/Grupo.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="index.html" class="logo"><img src="images/logo.png"></a>
+            <div class="search-box">
+                <img src="images/search.png">
+                <input type="text" placeholder="Search">
+            </div>
+        </div>
+        <div class="navbar-center">
+            <ul>
+                <li><a href="home.html" class="active-link"><img src="images/home.png"><span>Inicio</span></a></li>
+                <li><a href="network.html"><img src="images/network.png"><span>Network</span></a></li>
+                <li><a href="jobs.html"><img src="images/jobs.png"><span>Trabajos</span></a></li>
+                <li><a href="messaging.html"><img src="images/message.png"><span>Mensajes</span></a></li>
+                <li><a href="Amistades.html"><img src="images/network.png"><span>Mis amistades</span></a></li>
+                <li><a href="MisGrupos.html"><img src="images/network.png"><span>Mis grupos</span></a></li>
+                <li>
+                    <div class="notification-icon" onclick="toggleNotificationMenu()">
+                        <img src="images/notification.png" alt="Notificaciones">
+                        <div class="notification-badge" id="notification-badge"></div>
+                    </div>
+                    <div class="notification-menu" id="notification-menu">
+                        <!-- Las notificaciones se cargan aquí dinámicamente-->
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-right">
+            
+            <div class="online">
+                <img src="images/default-profile.png" class="nav-profile-img" id="nav-profile-img" onclick="toggleMenu()">
+            </div>
+        </div>
+    <!-----------profle-drop-down-menu----->
+    <!---Esto es para el menú de opciones desde el logo de perfile-->
+    <div class="profile-menu-wrap" id="profileMenu">
+        <div class="profile-menu">
+            <div class="user-info">
+                <img src="images/user-1.png" id="menu-profile-img">
+                <div>
+                    <h3 id="menu-profile-name">Rayan Walton</h3>
+                    <a href="profile.html">See your profile</a>
+                </div>
+            </div>
+            <hr>
+            <a href="CrearGrupo.html" class="profile-menu-link">
+                <img src="images/setting.png">
+                <p>Crear Grupo</p>
+                <span>></span>
+            </a>
+            <a href="CrearTorneo.html" class="profile-menu-link">
+                <img src="images/setting.png">
+                <p>Crear torneo</p>
+                <span>></span>
+            </a>
+            <a href="CrearTrabajo.html" class="profile-menu-link">
+                <img src="images/jobs.png">
+                <p>Crear trabajo</p>
+                <span>></span>
+            </a>
+            <a href="MisOfertas.html" class="profile-menu-link">
+                <img src="images/jobs.png">
+                <p>Mis Ofertas</p>
+                <span>></span>
+            </a>
+            <a href="MisTrabajos.html" class="profile-menu-link">
+                <img src="images/jobs.png">
+                <p>Mis Trabajos</p>
+                <span>></span>
+            </a>
+            <a href="/src/FRONTEND/index.html" class="profile-menu-link">
+                <img src="images/logout.png">
+                <p>Logout</p>
+                <span>></span>
+            </a>
+        </div>
+    </div>
+</nav>
+    <section class="form_wrap">
+        <section class="contact_info">
+            <section class="info_title">
+                <span class="fa fa-users"></span>
+                <h2>INFORMACIÓN DEL TORNEO</h2>
+            </section>
+        </section>
+
+        <form action="/api/tournaments" method="post" class="form_contact" id="create-tournament-form" enctype="multipart/form-data">
+            <h2>Crear un Torneo</h2>
+            <div class="user_info">
+                <div class="photo-upload">
+                    <img src="images/logo-camara.png" alt="Upload Tournament Photo" id="tournament-photo-preview">
+                    <input type="file" id="tournament-photo" name="photo" accept="image/*" onchange="previewTournamentPhoto()">
+                </div>
+                <label for="tournament-name">Nombre del Torneo *</label>
+                <input type="text" id="tournament-name" name="name" required>
+
+                <label for="tournament-description">Descripción *</label>
+                <textarea id="tournament-description" name="description" required></textarea>
+
+                <label for="tournament-game">Videojuego *</label>
+                <input type="text" id="tournament-game" name="game" required>
+
+                <label for="tournament-date">Fecha *</label>
+                <input type="date" id="tournament-date" name="date" required>
+
+                <label for="tournament-prize">Premio *</label>
+                <input type="text" id="tournament-prize" name="prize" required>
+
+                <label for="tournament-privacy">Privacidad *</label>
+                <select id="tournament-privacy" name="privacy" required>
+                    <option value="public">Público</option>
+                    <option value="private">Privado</option>
+                </select>
+
+                <input type="submit" value="Crear Torneo">
+            </div>
+        </form>
+
+</section>
+
+    <script src="js/CrearTorneo.js"></script>
+    <script src="js/posts.js"></script>
+    <script src="js/network.js"></script>
+    <script src="js/home.js"></script>
+
+<script>
+
+    let profileMenu =document.getElementById("profileMenu");
+
+    function toggleMenu(){
+        profileMenu.classList.toggle("open-menu");
+    }
+
+</script>
+<script>
+    let sideActivity = document.getElementById("sidebarActivity");
+    let moreLink = document.getElementById("showMoreLink");
+
+    function toggleActivity(){
+        sideActivity.classList.toggle("open-activity");
+        
+        if(sideActivity.classList.contains("open-activity")){
+            moreLink.innerHTML = "Show less <b>-</b>";
+        } else{
+            moreLink.innerHTML = "Show more <b>+</b>";
+        }
+}
+</script>
+
+
+</body>
+</html>
