@@ -1,5 +1,5 @@
-import com.bicicletas.trayectos.dataAccess.*;
-import com.bicicletas.trayectos.logica.*;
+package com.bicicletas.trayectos.dataAccess;
+
 import com.bicicletas.trayectos.modelo.*;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,44 +1,31 @@
-import java.util.List;
+package com.bicicletas.trayectos.logica;
+
+import com.bicicletas.trayectos.dataAccess.ReporteRepository;
+import com.bicicletas.trayectos.modelo.Reporte;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.bicicletas.trayectos.dataAccess.*;
-import com.bicicletas.trayectos.logica.*;
-import com.bicicletas.trayectos.modelo.*;
+import java.util.Optional;
+
 @Service
-@RequestMapping("/reporte")
 public class ReporteServices {
-    @Autowired
-    UsuarioRepository usuario;
 
     @Autowired
-    ReporteRepository reporte;
+    private ReporteRepository reporteRepository;
 
-    //Crecion de usuario:
-    @GetMapping("/creacionReporte")
-    public Integer publicar(@RequestParam String ubicacion, @RequestParam Integer idUsuario, @RequestParam String descripcion, @RequestParam List<String> imagenes){
-        Reporte rpt = new Reporte();
-        rpt.setUbicacion(ubicacion);
-        rpt.setId(idUsuario);
-        rpt.setDescripcion(descripcion);
-        //rpt.setUsuario(null);
-        rpt.setImagenes(imagenes);
-        rpt.setLikes(0);
+    public Integer publicar(float latitud, float longitud, Integer idUsuario, String descripcion, String rutaImagen) {
+        Reporte reporte = new Reporte();
+        reporte.setLatitud(latitud);
+        reporte.setLongitud(longitud);
+        reporte.setId(idUsuario);
+        reporte.setDescripcion(descripcion);
+        reporte.setImagen(rutaImagen);
 
-        if(reporte.save(rpt).equals(null)){
-            return -1;
-        }
-        else{
-            reporte.save(rpt);
-            return rpt.getId();
+        Optional<Reporte> reporteOptional = reporteRepository.findById(idUsuario);
+        if (reporteOptional.isPresent()) {
+            reporte = reporteOptional.get();
         }
 
-    }
-
-    public void cargueImagenes (){
-        
+        return reporteRepository.save(reporte).getId();
     }
 }

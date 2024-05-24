@@ -1,31 +1,28 @@
 package com.bicicletas.trayectos.modelo;
 
-import java.util.List;
-import java.util.ArrayList;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import lombok.Data;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Reporte {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "reporteID")
-    Integer id;
+    private Integer id;
 
-    String ubicacion;
-    String descripcion;
-    List <String> imagenes = new ArrayList<>();
-    Integer likes;
+    private float latitud;
+    private float longitud;
+    private String descripcion;
+    private String imagen; // Campo para almacenar la ruta de la imagen
+
+    @Column(nullable = false)
+    private Integer likes = 0; // Se inicializa en 0 por defecto
 
     @ManyToOne
-    Usuario usuario;
+    private Usuario usuario;
 }
