@@ -3,6 +3,8 @@ package com.bicicletas.trayectos.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,22 +18,27 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
-@RestController
+@Controller
 @RequestMapping("/reporte")
 public class ReporteController {
+    
     @Autowired
     private ReporteServices reporteServices;
 
+    @GetMapping("/creacionReporte")
+    public String mostrarFormularioCreacionReporte(Model model) {
+        return "crearReporte";
+    }
+
     @PostMapping("/creacionReporte")
-    public ResponseEntity<Integer> publicarReporte(
+    public String publicarReporte(
             @RequestParam String ubicacion,
             @RequestParam Integer idUsuario,
             @RequestParam String descripcion,
-            @RequestParam(required = false) MultipartFile imagen
+            @RequestParam(required = false) MultipartFile imagen,
+            Model model
     ) {
         String rutaImagen = guardarImagen(imagen);
-
-        // Obtener la latitud y longitud desde la ubicación
         String[] coordenadas = ubicacion.split(",");
         float latitud = Float.parseFloat(coordenadas[0].trim());
         float longitud = Float.parseFloat(coordenadas[1].trim());
@@ -39,9 +46,11 @@ public class ReporteController {
         Integer idReporte = reporteServices.publicar(latitud, longitud, idUsuario, descripcion, rutaImagen);
 
         if (idReporte != -1) {
-            return ResponseEntity.ok(idReporte);
+            model.addAttribute("idReporte", idReporte);
+            return "reporteCreado";
         } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            model.addAttribute("error", "Error al crear el reporte");
+            return "crearReporte";
         }
     }
 
