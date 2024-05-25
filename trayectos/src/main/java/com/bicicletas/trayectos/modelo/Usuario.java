@@ -24,6 +24,6 @@ public class Usuario {
     String email;
     Integer telefono;
 
-    @OneToMany(mappedBy = "reporteID", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     List <Reporte> reportes = new ArrayList<>();
 }

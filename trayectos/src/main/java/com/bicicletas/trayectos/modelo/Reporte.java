@@ -25,5 +25,6 @@ public class Reporte {
     private Integer likes = 0; // Se inicializa en 0 por defecto
 
     @ManyToOne
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 }
