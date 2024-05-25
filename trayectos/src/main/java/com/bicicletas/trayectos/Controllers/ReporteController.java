@@ -27,10 +27,10 @@ public class ReporteController {
 
     @GetMapping("/creacionReporte")
     public String mostrarFormularioCreacionReporte(Model model) {
-        return "crearReporte";
+        return "/pantallas/crearReporte";
     }
 
-    @PostMapping("/creacionReportes")
+    @PostMapping("/creacionReporte/grabar")
     public String publicarReporte(
             @RequestParam String ubicacion,
             @RequestParam Integer idUsuario,
@@ -47,10 +47,10 @@ public class ReporteController {
 
         if (idReporte != -1) {
             model.addAttribute("idReporte", idReporte);
-            return "reporteCreado";
+            return "reportecreado";
         } else {
             model.addAttribute("error", "Error al crear el reporte");
-            return "crearReporte";
+            return "reportenocreado";
         }
     }
 

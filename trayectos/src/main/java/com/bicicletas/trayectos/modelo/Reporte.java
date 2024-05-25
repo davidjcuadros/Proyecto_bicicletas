@@ -19,6 +19,7 @@ public class Reporte {
     private float longitud;
     private String descripcion;
     private String imagen; // Campo para almacenar la ruta de la imagen
+    
 
     @Column(nullable = false)
     private Integer likes = 0; // Se inicializa en 0 por defecto

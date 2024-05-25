@@ -13,7 +13,8 @@ public class ReporteServices {
     @Autowired
     private ReporteRepository reporteRepository;
 
-    public Integer publicar(float latitud, float longitud, Integer idUsuario, String descripcion, String rutaImagen) {
+    public Integer publicar(float latitud, float longitud, Integer idUsuario,
+                            String descripcion, String rutaImagen) {
         Reporte reporte = new Reporte();
         reporte.setLatitud(latitud);
         reporte.setLongitud(longitud);
