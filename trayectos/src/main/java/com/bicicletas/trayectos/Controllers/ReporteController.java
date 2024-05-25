@@ -30,7 +30,7 @@ public class ReporteController {
         return "crearReporte";
     }
 
-    @PostMapping("/creacionReporte")
+    @PostMapping("/creacionReportes")
     public String publicarReporte(
             @RequestParam String ubicacion,
             @RequestParam Integer idUsuario,
