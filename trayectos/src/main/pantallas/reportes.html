@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reportes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            max-width: 100px;
+        }
+
+        main {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .reporte {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .reporte-header {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .reporte-header h2 {
+            font-family: 'League Spartan', sans-serif;
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .reporte-imagen {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .reporte-likes {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .reporte-likes i {
+            margin-right: 5px;
+        }
+
+        .like-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #262626;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo" class="logo">
+    </header>
+    <main>
+        <div th:each="reporte : ${reportes}" class="reporte">
+            <div class="reporte-header">
+                <h2 th:text="${reporte.usuario.nombre}"></h2>
+            </div>
+            <p th:text="${reporte.descripcion}"></p>
+            <img th:src="@{'data:image/jpeg;base64,' + ${T(org.springframework.util.Base64Utils).encodeToString(reporte.imagen)}}" alt="Imagen del reporte" class="reporte-imagen">
+            <p>Ubicación: <span th:text="${reporte.latitud + ', ' + reporte.longitud}"></span></p>
+            <div class="reporte-likes">
+                <i class="far fa-heart"></i>
+                <span th:text="${reporte.likes}"></span>
+                <form th:action="@{/reporte/{id}/like(id=${reporte.id})}" method="post">
+                    <button type="submit" class="like-btn"><i class="far fa-heart"></i> Solucionado</button>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

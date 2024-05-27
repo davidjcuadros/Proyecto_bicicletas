@@ -1,11 +1,15 @@
 package com.bicicletas.trayectos.logica;
 
-import com.bicicletas.trayectos.dataAccess.ReporteRepository;
-import com.bicicletas.trayectos.modelo.Reporte;
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Optional;
+import com.bicicletas.trayectos.dataAccess.ReporteRepository;
+import com.bicicletas.trayectos.modelo.Reporte;
 
 @Service
 public class ReporteServices {
@@ -14,13 +18,13 @@ public class ReporteServices {
     private ReporteRepository reporteRepository;
 
     public Integer publicar(float latitud, float longitud, Integer idUsuario,
-                            String descripcion, String rutaImagen) {
+                            String descripcion, byte[] imagen) {
         Reporte reporte = new Reporte();
         reporte.setLatitud(latitud);
         reporte.setLongitud(longitud);
         reporte.setId(idUsuario);
         reporte.setDescripcion(descripcion);
-        reporte.setImagen(rutaImagen);
+        reporte.setImagen(imagen);
 
         Optional<Reporte> reporteOptional = reporteRepository.findById(idUsuario);
         if (reporteOptional.isPresent()) {
@@ -46,5 +50,18 @@ public class ReporteServices {
         }
     
         return false;
+    }
+
+    public List<Reporte> obtenerTodosLosReportes() {
+        return reporteRepository.findAll();
+    }
+
+    public byte[] convertirImagenABytes(MultipartFile imagen) {
+        try {
+            return imagen.getBytes();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
