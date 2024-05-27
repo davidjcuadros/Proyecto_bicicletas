@@ -27,9 +27,10 @@ public class ReporteController {
 
     @GetMapping("/creacionReporte")
     public String mostrarFormularioCreacionReporte(Model model) {
-        return "/pantallas/crearReporte";
+        return "crearReporte";
     }
 
+    //CU001-crear-reporte
     @PostMapping("/creacionReporte/grabar")
     public String publicarReporte(
             @RequestParam String ubicacion,
@@ -77,7 +78,7 @@ public class ReporteController {
 
         return "";
     }
-
+    //CU004-seleccionar-yaSolucionado
     @PostMapping("/reporte/{idReporte}/like")
     public ResponseEntity<String> actualizarLikes(@PathVariable Integer idReporte) {
         try {
