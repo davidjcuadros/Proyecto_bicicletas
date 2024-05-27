@@ -29,4 +29,22 @@ public class ReporteServices {
 
         return reporteRepository.save(reporte).getId();
     }
+
+    public boolean actualizarLikes(Integer idReporte) {
+        // Obtener el reporte de la base de datos
+        Reporte reporte = reporteRepository.findById(idReporte).orElse(null);
+    
+        if (reporte != null) {
+            // Incrementar el contador de likes
+            int likesActuales = reporte.getLikes();
+            reporte.setLikes(likesActuales + 1);
+    
+            // Guardar los cambios en la base de datos
+            reporteRepository.save(reporte);
+    
+            return true;
+        }
+    
+        return false;
+    }
 }

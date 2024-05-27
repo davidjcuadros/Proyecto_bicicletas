@@ -77,4 +77,18 @@ public class ReporteController {
 
         return "";
     }
+
+    @PostMapping("/reporte/{idReporte}/like")
+    public ResponseEntity<String> actualizarLikes(@PathVariable Integer idReporte) {
+        try {
+            boolean exitoActualizacion = reporteServices.actualizarLikes(idReporte);
+            if (exitoActualizacion) {
+                return ResponseEntity.ok("Like actualizado correctamente");
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al actualizar el like");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al actualizar el like: " + e.getMessage());
+        }
+    }
 }
