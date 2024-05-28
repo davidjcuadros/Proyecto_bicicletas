@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creación de publicación</title>
+    <title>CyclistAlert</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=League+Spartan&display=swap');
@@ -114,7 +114,7 @@
             const formData = new FormData(form);
 
             try {
-                const response = await fetch('/reporte/creacionReporte', {
+                const response = await fetch('/reporte/publicar', {
                     method: 'POST',
                     body: formData
                 });

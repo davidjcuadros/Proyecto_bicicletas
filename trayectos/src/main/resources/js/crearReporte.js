@@ -10,11 +10,11 @@ form.addEventListener('submit', async (event) => {
     const longitud = marker ? marker.getLatLng().lng : '';
     const idUsuario = 1; // Reemplaza con el ID de usuario correspondiente
     const descripcion = formData.get('description');
-    const imagen = formData.get('image');
 
     formData.append('latitud', latitud);
     formData.append('longitud', longitud);
     formData.append('idUsuario', idUsuario);
+    formData.append('descripcion', descripcion);
 
     // Realizar la solicitud POST
     try {
@@ -28,9 +28,9 @@ form.addEventListener('submit', async (event) => {
             console.log('Respuesta del servidor:', result);
             // Redirigir a la página correspondiente según la respuesta
             if (result === 'reportecreado') {
-                window.location.href = '/reporte/reportecreado';
+                window.location.href = '/reporte/reporte_creado';
             } else {
-                window.location.href = '/reporte/reportenocreado';
+                window.location.href = '/reporte/reporte_nocreado';
             }
         } else {
             console.error('Error al enviar el reporte');

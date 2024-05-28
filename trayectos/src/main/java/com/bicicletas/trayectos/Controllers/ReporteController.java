@@ -46,7 +46,7 @@ public class ReporteController {
     }
 
     //CU004-seleccionar-yaSolucionado
-    @PostMapping("/reporte/{idReporte}/like")
+    @PostMapping("/{idReporte}/like")
     public ResponseEntity<String> actualizarLikes(@PathVariable Integer idReporte) {
         try {
             boolean exitoActualizacion = reporteServices.actualizarLikes(idReporte);
@@ -68,10 +68,19 @@ public class ReporteController {
         return "reportes";
     }
     
-    @GetMapping("/reporte/{idReporte}/like")
+    @GetMapping("/{idReporte}/like")
     public String darLikeAReporte(@PathVariable Integer idReporte) {
         reporteServices.actualizarLikes(idReporte);
         return "redirect:/reportes";
     }
 
+    @GetMapping("/reporte_creado")
+    public String mostrarReporteCreado(Model model) {
+        return "reportecreado";
+    }
+    
+    @GetMapping("/reporte_nocreado")
+    public String mostrarReporteNoCreado(Model model) {
+        return "reportenocreado";
+    }
 }

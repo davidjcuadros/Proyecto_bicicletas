@@ -6,7 +6,6 @@
     <title>CyclistAlert</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=League+Spartan&display=swap');
-
         body {
             margin: 0;
             padding: 0;
@@ -19,25 +18,22 @@
             align-items: center;
             text-align: center;
             color: white;
+            position: relative;
         }
-
         .titulo {
             font-family: 'League Spartan', sans-serif;
             font-size: 48px;
             margin-bottom: 10px;
         }
-
         .subtitulo {
             font-size: 24px;
             margin-bottom: 20px;
         }
-
         .descripcion {
             max-width: 600px;
             line-height: 1.5;
             margin-bottom: 30px;
         }
-
         .boton-crear-reporte {
             display: inline-block;
             padding: 10px 20px;
@@ -47,24 +43,24 @@
             border-radius: 4px;
             font-family: 'Raleway', sans-serif;
         }
-
         .boton-crear-reporte:hover {
             background-color: #023e8a;
         }
-
-        .background-image {
-            position: fixed;
+        .background-video {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
             object-fit: cover;
+            z-index: -1;
         }
     </style>
 </head>
 <body>
-    <img src="../images/fondo.png" alt="Fondo" class="background-image">
+    <video autoplay loop muted class="background-video">
+        <source src="fondo.mp4" type="video/mp4">
+    </video>
     <h1 class="titulo">CyclistAlert</h1>
     <h2 class="subtitulo">Tu comunidad para reportar y mejorar la infraestructura ciclista</h2>
     <p class="descripcion">En <strong>CyclistAlert</strong> creemos en la seguridad y comodidad de todos los ciclistas. Nuestro objetivo es proporcionar una plataforma donde puedas informar sobre cualquier hueco, bache, obstáculo o fallo en las rutas ciclistas de tu ciudad. Juntos, podemos hacer que las calles sean más seguras para todos.</p>
