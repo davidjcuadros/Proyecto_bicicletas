@@ -10,9 +10,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UsuarioRepository 
-    extends JpaRepository <Usuario, Integer>
-    {
-
+extends JpaRepository <Usuario, Integer>
+{
         @Query("SELECT r FROM Reporte r WHERE r.usuario.id = :idUsuario")
         List<Reporte> feedUsuario(@Param("idUsuario") Integer idUsuario);
 }
