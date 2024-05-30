@@ -72,7 +72,7 @@
         <h1>Creación de publicación</h1>
         <p>Hola! Aquí puedes subir un reporte sobre los diferentes desafíos infraestructurales que encuentras en tus recorridos en bicicleta en la ciudad de Bogotá.</p>
 
-        <form id="reporteForm" method="post" enctype="multipart/form-data">
+        <form id="reporteForm" method="post" th:action="@{/publicar}"
             <label for="location">Ubicación:</label>
             <input type="text" id="location" name="location" placeholder="Selecciona una ubicación en el mapa" readonly>
 
